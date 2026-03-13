@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KORE Integrative Health</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7a8c6e;
+    --sage-light: #a8b89a;
+    --earth: #c4a882;
+    --earth-light: #e8d9c4;
+    --cream: #f5f0e8;
+    --deep: #2c3128;
+    --text: #3d4038;
+    --muted: #8a8f82;
+    --white: #fdfcf9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    background: rgba(253,252,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,140,110,0.15);
+    transition: padding 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--deep);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    color: var(--sage);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav ul a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  nav ul a:hover { color: var(--sage); }
+
+  .nav-cta {
+    background: var(--deep) !important;
+    color: var(--cream) !important;
+    padding: 0.6rem 1.4rem !important;
+    border-radius: 40px;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--sage) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 9rem 4rem 5rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    color: var(--deep);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-desc {
+    font-size: 0.97rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.8s forwards;
+  }
+
+  .btn-primary {
+    background: var(--sage);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 40px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--deep); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--deep);
+    border: 1px solid var(--deep);
+    padding: 0.9rem 2rem;
+    border-radius: 40px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: var(--deep); color: var(--white); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e8ddd0 0%, #c8d4be 50%, #b8c9a8 100%);
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.35;
+  }
+
+  .orb1 {
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, #a8b89a, transparent 70%);
+    top: -80px; right: -120px;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .orb2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, #c4a882, transparent 70%);
+    bottom: 60px; left: 20px;
+    animation: float 10s 2s ease-in-out infinite;
+  }
+
+  .hero-leaf {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.6s forwards;
+  }
+
+  .hero-leaf svg {
+    width: 70%;
+    height: 70%;
+    opacity: 0.18;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    background: rgba(253,252,249,0.92);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 1.2rem 1.6rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 1s forwards;
+  }
+
+  .hero-badge p {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-badge h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--deep);
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 6rem 4rem; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 0.97rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .value-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid rgba(122,140,110,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .value-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(44,49,40,0.08); }
+
+  .value-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .value-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .value-card p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--white); }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    border: 1px solid var(--earth-light);
+    border-radius: 20px;
+    padding: 2.4rem 2rem;
+    transition: all 0.35s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--earth));
+    transform: scaleX(0);
+    transition: transform 0.35s;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,49,40,0.1); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--earth-light);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.8rem;
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  /* ── FORM SECTION ── */
+  .intake {
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intake::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(122,140,110,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  .intake-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: start;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .intake-info .section-label { color: var(--sage-light); }
+
+  .intake-info .section-title { color: var(--cream); }
+
+  .intake-info p {
+    font-size: 0.93rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 2rem;
+  }
+
+  .intake-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .intake-steps li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--earth-light);
+    letter-spacing: 0.04em;
+  }
+
+  .step-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    flex-shrink: 0;
+  }
+
+  /* Form */
+  .form-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 2.8rem;
+  }
+
+  .form-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .form-card > p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--earth-light);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 0.45rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    border: 1px solid var(--earth-light);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.25s, box-shadow 0.25s;
+    outline: none;
+    appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 3px rgba(122,140,110,0.12);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.83rem;
+    font-weight: 300;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--sage);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--sage);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .form-submit:hover { background: var(--deep); transform: translateY(-1px); }
+
+  /* ── SUCCESS MESSAGE ── */
+  #success-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  #success-msg .success-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #success-msg h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 0.5rem;
+  }
+
+  #success-msg p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--cream);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--earth-light);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--deep);
+    text-transform: uppercase;
+  }
+
+  .footer-logo span { color: var(--sage); }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-20px); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    nav ul { gap: 1.4rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 320px; }
+    .hero-left { padding: 8rem 2rem 4rem; }
+    section { padding: 4rem 2rem; }
+    .about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .intake-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    nav ul { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .about-values { grid-template-columns: 1fr; }
+    .checkbox-group { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>K</span>ORE Integrative Health</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#intake" class="nav-cta">Begin Your Journey</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Holistic · Integrative · Whole-Person Care</p>
+    <h1 class="hero-title">
+      Healing begins<br>at the <em>core</em><br>of you.
+    </h1>
+    <p class="hero-desc">
+      We blend time-honored alternative medicine with a compassionate, whole-person approach — helping you understand your body, restore your balance, and reclaim your vitality.
+    </p>
+    <div class="hero-actions">
+      <a href="#intake" class="btn-primary">Request a Consultation</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-bg"></div>
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+    <div class="hero-leaf">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 20 C140 20, 180 60, 180 100 C180 140, 140 180, 100 180 C60 180, 20 140, 20 100 C20 60, 60 20, 100 20Z" stroke="#3d4038" stroke-width="1.5" fill="none"/>
+        <path d="M100 20 C100 20, 100 100, 100 180" stroke="#3d4038" stroke-width="1" fill="none"/>
+        <path d="M100 60 C120 50, 160 70, 170 90" stroke="#3d4038" stroke-width="0.8" fill="none"/>
+        <path d="M100 80 C115 68, 148 80, 158 98" stroke="#3d4038" stroke-width="0.8" fill="none"/>
+        <path d="M100 100 C115 88, 142 95, 150 112" stroke="#3d4038" stroke-width="0.8" fill="none"/>
+        <path d="M100 60 C80 50, 40 70, 30 90" stroke="#3d4038" stroke-width="0.8" fill="none"/>
+        <path d="M100 80 C85 68, 52 80, 42 98" stroke="#3d4038" stroke-width="0.8" fill="none"/>
+        <path d="M100 100 C85 88, 58 95, 50 112" stroke="#3d4038" stroke-width="0.8" fill="none"/>
+      </svg>
+    </div>
+    <div class="hero-badge">
+      <p>Integrative Medicine</p>
+      <h4>Mind · Body · Spirit</h4>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <p class="section-label">Our Philosophy</p>
+    <h2 class="section-title">Rooted in nature,<br>guided by science.</h2>
+    <p>At KORE Integrative Health, we believe true healing goes beyond treating symptoms. We work to understand the whole person — your lifestyle, environment, history, and aspirations — to create a personalized path toward lasting wellness.</p>
+    <p>Our practitioners combine evidence-informed approaches with the wisdom of traditional and alternative medicine, providing a safe, nurturing space for you to restore your natural balance.</p>
+  </div>
+  <div class="about-values">
+    <div class="value-card">
+      <div class="value-icon">🌱</div>
+      <h4>Whole-Person Care</h4>
+      <p>We treat the root, not just the symptoms, honoring every dimension of your health.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <h4>Deep Listening</h4>
+      <p>Your story matters. We take time to truly understand your unique journey.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌿</div>
+      <h4>Natural Approaches</h4>
+      <p>Blending herbal, nutritional, and energy-based modalities for gentle healing.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">✨</div>
+      <h4>Personalized Plans</h4>
+      <p>No two people are the same. Your care plan will be uniquely crafted for you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Pathways to wellness</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3>Initial Health Overview</h3>
+      <p>A thorough conversation about your health history, current concerns, lifestyle habits, and goals — the starting point for every care journey.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3>Nutritional Guidance</h3>
+      <p>Personalized nutritional support that honors your body's unique needs, addressing deficiencies and supporting optimal function through food as medicine.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3>Herbal & Botanical Care</h3>
+      <p>Thoughtful use of plant-based therapies, tinctures, and supplements to support the body's innate healing intelligence.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <h3>Energy & Bodywork</h3>
+      <p>Modalities designed to clear energetic blocks, release tension, and restore the flow of vitality throughout the body and mind.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <h3>Mind-Body Practices</h3>
+      <p>Breathwork, meditation guidance, and stress-response coaching to reconnect the mind and body and cultivate inner peace.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <h3>Ongoing Wellness Plans</h3>
+      <p>Continued support with regular check-ins, progress review, and adaptive guidance as you grow and evolve on your healing journey.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTAKE FORM -->
+<section class="intake" id="intake">
+  <div class="intake-inner">
+    <div class="intake-info">
+      <p class="section-label">Begin Your Journey</p>
+      <h2 class="section-title">Let's talk about<br>how we can help.</h2>
+      <p>Share a little about yourself and what brings you here. This brief intake form helps us prepare for your complimentary 15-minute discovery call — no commitment required.</p>
+      <ul class="intake-steps">
+        <li><span class="step-dot"></span>Fill out the short form</li>
+        <li><span class="step-dot"></span>We'll review your submission within 48 hours</li>
+        <li><span class="step-dot"></span>You'll receive a call or email to schedule</li>
+        <li><span class="step-dot"></span>Enjoy a free 15-min discovery conversation</li>
+      </ul>
+    </div>
+
+    <div class="form-card">
+      <h3>Request a Screening</h3>
+      <p>All information is kept private and confidential.</p>
+
+      <form id="intake-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Your last name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@email.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="(555) 000-0000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Contact Method</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>Email</option>
+            <option>Phone call</option>
+            <option>Text message</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Availability</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>Mornings (9am–12pm)</option>
+            <option>Afternoons (12pm–4pm)</option>
+            <option>Evenings (4pm–7pm)</option>
+            <option>Flexible / No preference</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Areas of Concern (select all that apply)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox"> Chronic Fatigue</label>
+            <label class="checkbox-label"><input type="checkbox"> Digestive Issues</label>
+            <label class="checkbox-label"><input type="checkbox"> Anxiety / Stress</label>
+            <label class="checkbox-label"><input type="checkbox"> Sleep Difficulties</label>
+            <label class="checkbox-label"><input type="checkbox"> Hormonal Imbalance</label>
+            <label class="checkbox-label"><input type="checkbox"> Pain / Inflammation</label>
+            <label class="checkbox-label"><input type="checkbox"> Immune Support</label>
+            <label class="checkbox-label"><input type="checkbox"> Weight / Metabolism</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Tell us a little about what's brought you here</label>
+          <textarea placeholder="Share as much or as little as you're comfortable with. What are your main health concerns or goals?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Have you worked with a holistic or integrative practitioner before?</label>
+          <select>
+            <option value="">Select one...</option>
+            <option>Yes, I have experience with holistic care</option>
+            <option>No, this is new territory for me</option>
+            <option>I've explored some things on my own</option>
+          </select>
+        </div>
+
+        <button type="submit" class="form-submit">Submit My Request →</button>
+      </form>
+
+      <div id="success-msg">
+        <div class="success-icon">🌿</div>
+        <h4>Thank you for reaching out.</h4>
+        <p>We'll be in touch within 48 hours to schedule your discovery call. We look forward to supporting your journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>K</span>ORE Integrative Health</div>
+  <p>© 2025 KORE Integrative Health · All rights reserved</p>
+  <p>Crafted with care · contact@korehealth.com</p>
+</footer>
+
+<script>
+  document.getElementById('intake-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  });
+
+  // Subtle scroll-triggered fade-ins
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .value-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
