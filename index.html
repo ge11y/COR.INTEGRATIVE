@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KORE Integrative Health</title>
+<title>COR Integrative Health</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -317,8 +317,13 @@
   .value-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(44,49,40,0.08); }
 
   .value-icon {
-    font-size: 1.6rem;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .value-icon svg {
+    display: block;
   }
 
   .value-card h4 {
@@ -355,11 +360,11 @@
   .service-card {
     border: 1px solid var(--earth-light);
     border-radius: 20px;
-    padding: 2.4rem 2rem;
-    transition: all 0.35s;
-    position: relative;
     overflow: hidden;
+    transition: box-shadow 0.35s;
   }
+
+  .service-card:hover { box-shadow: 0 12px 40px rgba(44,49,40,0.09); }
 
   .service-card::before {
     content: '';
@@ -371,8 +376,20 @@
     transition: transform 0.35s;
   }
 
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,49,40,0.1); }
+  .service-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 2rem 2rem 1.8rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .service-toggle-left { flex: 1; }
 
   .service-num {
     font-family: 'Cormorant Garamond', serif;
@@ -380,7 +397,7 @@
     font-weight: 300;
     color: var(--earth-light);
     line-height: 1;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
   }
 
   .service-card h3 {
@@ -388,14 +405,52 @@
     font-size: 1.4rem;
     font-weight: 400;
     color: var(--deep);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0;
   }
 
-  .service-card p {
+  .service-arrow {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--earth-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    transition: transform 0.35s, background 0.25s, border-color 0.25s;
+    color: var(--muted);
     font-size: 0.85rem;
+  }
+
+  .service-card.open .service-arrow {
+    transform: rotate(45deg);
+    background: var(--sage);
+    border-color: var(--sage);
+    color: var(--white);
+  }
+
+  .service-card.open .service-num { color: var(--sage); }
+
+  .service-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease, padding 0.3s ease;
+    padding: 0 2rem;
+  }
+
+  .service-card.open .service-body {
+    max-height: 300px;
+    padding: 0 2rem 2rem;
+  }
+
+  .service-body p {
+    font-size: 0.9rem;
     font-weight: 300;
     color: var(--muted);
-    line-height: 1.75;
+    line-height: 1.85;
+    border-top: 1px solid var(--earth-light);
+    padding-top: 1.2rem;
   }
 
   /* ── FORM SECTION ── */
@@ -674,7 +729,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><span>K</span>ORE Integrative Health</a>
+  <a class="nav-logo" href="#"><span>C</span>OR Integrative Health</a>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -725,27 +780,102 @@
   <div class="about-text">
     <p class="section-label">Our Philosophy</p>
     <h2 class="section-title">Rooted in nature,<br>guided by science.</h2>
-    <p>At KORE Integrative Health, we believe true healing goes beyond treating symptoms. We work to understand the whole person — your lifestyle, environment, history, and aspirations — to create a personalized path toward lasting wellness.</p>
+    <p>At COR Integrative Health, we believe true healing goes beyond treating symptoms. We work to understand the whole person — your lifestyle, environment, history, and aspirations — to create a personalized path toward lasting wellness.</p>
     <p>Our practitioners combine evidence-informed approaches with the wisdom of traditional and alternative medicine, providing a safe, nurturing space for you to restore your natural balance.</p>
   </div>
   <div class="about-values">
     <div class="value-card">
-      <div class="value-icon">🌱</div>
+      <div class="value-icon">
+        <!-- Whole-Person Care: Plant with roots -->
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="26" cy="20" r="14" stroke="#7a8c6e" stroke-width="1.4" fill="none"/>
+          <!-- stem -->
+          <line x1="26" y1="34" x2="26" y2="42" stroke="#9a8060" stroke-width="1.4"/>
+          <!-- roots -->
+          <path d="M26 42 Q20 46 14 48" stroke="#9a8060" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M26 42 Q32 46 38 48" stroke="#9a8060" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <path d="M22 43 Q18 47 14 50" stroke="#9a8060" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <path d="M30 43 Q34 47 38 50" stroke="#9a8060" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <path d="M26 44 Q26 48 26 51" stroke="#9a8060" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+          <!-- center leaf -->
+          <path d="M26 28 C26 28 26 18 26 14" stroke="#7a8c6e" stroke-width="1.3" fill="none"/>
+          <path d="M26 22 C24 19 21 17 20 14 C22 14 25 16 26 18" fill="#7a8c6e" opacity="0.7"/>
+          <path d="M26 22 C28 19 31 17 32 14 C30 14 27 16 26 18" fill="#7a8c6e" opacity="0.7"/>
+          <!-- top leaf -->
+          <path d="M26 16 C24 13 22 11 20 10 C22 9 25 11 26 13" fill="#7a8c6e"/>
+          <path d="M26 16 C28 13 30 11 32 10 C30 9 27 11 26 13" fill="#7a8c6e"/>
+          <!-- small side leaves -->
+          <path d="M26 25 C23 23 20 23 18 21 C20 20 23 22 26 23" fill="#a8b89a" opacity="0.8"/>
+          <path d="M26 25 C29 23 32 23 34 21 C32 20 29 22 26 23" fill="#a8b89a" opacity="0.8"/>
+        </svg>
+      </div>
       <h4>Whole-Person Care</h4>
       <p>We treat the root, not just the symptoms, honoring every dimension of your health.</p>
     </div>
     <div class="value-card">
-      <div class="value-icon">🤝</div>
+      <div class="value-icon">
+        <!-- Deep Listening: Yin-yang orbs -->
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- left orb -->
+          <ellipse cx="21" cy="26" rx="11" ry="13" fill="#8a9480" opacity="0.25" stroke="#7a8c6e" stroke-width="1.3"/>
+          <ellipse cx="21" cy="26" rx="11" ry="13" fill="none" stroke="#7a8c6e" stroke-width="1.3"/>
+          <!-- right orb overlapping -->
+          <ellipse cx="31" cy="26" rx="11" ry="13" fill="#c4c8b8" opacity="0.35" stroke="#8a8f82" stroke-width="1.3"/>
+          <!-- inner detail dots -->
+          <circle cx="21" cy="22" r="2.5" fill="#7a8c6e" opacity="0.5"/>
+          <circle cx="31" cy="30" r="2.5" fill="#8a8f82" opacity="0.4"/>
+        </svg>
+      </div>
       <h4>Deep Listening</h4>
       <p>Your story matters. We take time to truly understand your unique journey.</p>
     </div>
     <div class="value-card">
-      <div class="value-icon">🌿</div>
+      <div class="value-icon">
+        <!-- Natural Approaches: Botanical leaves -->
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- main stem -->
+          <path d="M26 46 C26 46 24 36 22 28 C20 20 18 14 18 10" stroke="#9a8060" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <!-- large left leaf -->
+          <path d="M22 28 C16 24 10 22 8 16 C14 16 20 20 22 28Z" fill="#7a8c6e" opacity="0.8"/>
+          <!-- large right leaf -->
+          <path d="M20 22 C26 16 34 14 38 8 C32 10 24 16 20 22Z" fill="#a89a50" opacity="0.75"/>
+          <!-- mid left leaf -->
+          <path d="M23 32 C17 30 13 28 10 24 C15 23 20 27 23 32Z" fill="#7a8c6e" opacity="0.6"/>
+          <!-- mid right leaf -->
+          <path d="M21 26 C27 22 33 22 36 18 C31 19 25 23 21 26Z" fill="#a8b89a" opacity="0.7"/>
+          <!-- small top leaf -->
+          <path d="M19 16 C21 11 24 8 26 6 C25 10 22 13 19 16Z" fill="#7a8c6e" opacity="0.9"/>
+        </svg>
+      </div>
       <h4>Natural Approaches</h4>
       <p>Blending herbal, nutritional, and energy-based modalities for gentle healing.</p>
     </div>
     <div class="value-card">
-      <div class="value-icon">✨</div>
+      <div class="value-icon">
+        <!-- Personalized Plans: Neural starburst -->
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- center dot -->
+          <circle cx="26" cy="26" r="3" fill="#c4a882"/>
+          <!-- radiating lines at angles, with end dots -->
+          <line x1="26" y1="26" x2="10" y2="10" stroke="#3d4038" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="42" y2="10" stroke="#9a8060" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="10" y2="42" stroke="#9a8060" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="42" y2="42" stroke="#3d4038" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="26" y2="8" stroke="#7a8c6e" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="26" y2="44" stroke="#7a8c6e" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="8" y2="26" stroke="#7a8c6e" stroke-width="1.2" stroke-linecap="round"/>
+          <line x1="26" y1="26" x2="44" y2="26" stroke="#7a8c6e" stroke-width="1.2" stroke-linecap="round"/>
+          <!-- end dots -->
+          <circle cx="10" cy="10" r="2" fill="#c4a882" opacity="0.7"/>
+          <circle cx="42" cy="10" r="2" fill="#c4a882" opacity="0.7"/>
+          <circle cx="10" cy="42" r="2" fill="#c4a882" opacity="0.7"/>
+          <circle cx="42" cy="42" r="2" fill="#c4a882" opacity="0.7"/>
+          <circle cx="26" cy="8" r="1.5" fill="#a8b89a" opacity="0.7"/>
+          <circle cx="26" cy="44" r="1.5" fill="#a8b89a" opacity="0.7"/>
+          <circle cx="8" cy="26" r="1.5" fill="#a8b89a" opacity="0.7"/>
+          <circle cx="44" cy="26" r="1.5" fill="#a8b89a" opacity="0.7"/>
+        </svg>
+      </div>
       <h4>Personalized Plans</h4>
       <p>No two people are the same. Your care plan will be uniquely crafted for you.</p>
     </div>
@@ -759,36 +889,85 @@
     <h2 class="section-title">Pathways to wellness</h2>
   </div>
   <div class="services-grid">
+
     <div class="service-card">
-      <div class="service-num">01</div>
-      <h3>Initial Health Overview</h3>
-      <p>A thorough conversation about your health history, current concerns, lifestyle habits, and goals — the starting point for every care journey.</p>
+      <button class="service-toggle" onclick="toggleService(this)">
+        <div class="service-toggle-left">
+          <div class="service-num">01</div>
+          <h3>Initial Health Overview</h3>
+        </div>
+        <span class="service-arrow">+</span>
+      </button>
+      <div class="service-body">
+        <p>We begin with a thoughtful, comprehensive conversation about your health history, present concerns, daily rhythms, and long-term goals. This foundational session helps uncover patterns, identify root causes, and create a clear starting point for personalized care.</p>
+      </div>
     </div>
+
     <div class="service-card">
-      <div class="service-num">02</div>
-      <h3>Nutritional Guidance</h3>
-      <p>Personalized nutritional support that honors your body's unique needs, addressing deficiencies and supporting optimal function through food as medicine.</p>
+      <button class="service-toggle" onclick="toggleService(this)">
+        <div class="service-toggle-left">
+          <div class="service-num">02</div>
+          <h3>Nutritional Guidance</h3>
+        </div>
+        <span class="service-arrow">+</span>
+      </button>
+      <div class="service-body">
+        <p>Food can be one of the most powerful tools for healing when it is aligned with your body's individual needs. Through personalized guidance, we explore supportive choices that help restore balance, address deficiencies, and nourish your overall well-being from the inside out.</p>
+      </div>
     </div>
+
     <div class="service-card">
-      <div class="service-num">03</div>
-      <h3>Herbal & Botanical Care</h3>
-      <p>Thoughtful use of plant-based therapies, tinctures, and supplements to support the body's innate healing intelligence.</p>
+      <button class="service-toggle" onclick="toggleService(this)">
+        <div class="service-toggle-left">
+          <div class="service-num">03</div>
+          <h3>Herbal & Botanical Care</h3>
+        </div>
+        <span class="service-arrow">+</span>
+      </button>
+      <div class="service-body">
+        <p>Plant-based support can offer gentle yet profound nourishment for the body's natural healing processes. Herbal and botanical recommendations are chosen with care to complement your unique constitution, support balance, and work in harmony with your broader wellness plan.</p>
+      </div>
     </div>
+
     <div class="service-card">
-      <div class="service-num">04</div>
-      <h3>Energy & Bodywork</h3>
-      <p>Modalities designed to clear energetic blocks, release tension, and restore the flow of vitality throughout the body and mind.</p>
+      <button class="service-toggle" onclick="toggleService(this)">
+        <div class="service-toggle-left">
+          <div class="service-num">04</div>
+          <h3>Energy & Bodywork</h3>
+        </div>
+        <span class="service-arrow">+</span>
+      </button>
+      <div class="service-body">
+        <p>When stress, tension, or emotional strain accumulate, the body often holds onto those patterns in subtle and powerful ways. Energy-based modalities and bodywork practices help encourage release, restore flow, and support a greater sense of ease, vitality, and connection.</p>
+      </div>
     </div>
+
     <div class="service-card">
-      <div class="service-num">05</div>
-      <h3>Mind-Body Practices</h3>
-      <p>Breathwork, meditation guidance, and stress-response coaching to reconnect the mind and body and cultivate inner peace.</p>
+      <button class="service-toggle" onclick="toggleService(this)">
+        <div class="service-toggle-left">
+          <div class="service-num">05</div>
+          <h3>Mind-Body Practices</h3>
+        </div>
+        <span class="service-arrow">+</span>
+      </button>
+      <div class="service-body">
+        <p>Healing is not only physical — it also involves the nervous system, emotions, and inner awareness. Through practices such as breathwork, meditation, and stress-response support, you can build tools that help calm the mind, regulate the body, and create more resilience in everyday life.</p>
+      </div>
     </div>
+
     <div class="service-card">
-      <div class="service-num">06</div>
-      <h3>Ongoing Wellness Plans</h3>
-      <p>Continued support with regular check-ins, progress review, and adaptive guidance as you grow and evolve on your healing journey.</p>
+      <button class="service-toggle" onclick="toggleService(this)">
+        <div class="service-toggle-left">
+          <div class="service-num">06</div>
+          <h3>Ongoing Wellness Plans</h3>
+        </div>
+        <span class="service-arrow">+</span>
+      </button>
+      <div class="service-body">
+        <p>True healing is a process that unfolds over time, often in layers. Ongoing support provides space to check in, reflect on progress, and adapt your care as your needs shift — helping you feel guided, supported, and empowered throughout your wellness journey.</p>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -815,28 +994,28 @@
         <div class="form-row">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" placeholder="Your first name" required>
+            <input id="firstName" type="text" placeholder="Your first name" required>
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" placeholder="Your last name" required>
+            <input id="lastName" type="text" placeholder="Your last name" required>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
             <label>Email Address</label>
-            <input type="email" placeholder="you@email.com" required>
+            <input id="email" type="email" placeholder="you@email.com" required>
           </div>
           <div class="form-group">
             <label>Phone Number</label>
-            <input type="tel" placeholder="(555) 000-0000">
+            <input id="phone" type="tel" placeholder="(555) 000-0000">
           </div>
         </div>
 
         <div class="form-group">
           <label>Preferred Contact Method</label>
-          <select>
+          <select id="contactMethod">
             <option value="">Select one...</option>
             <option>Email</option>
             <option>Phone call</option>
@@ -846,7 +1025,7 @@
 
         <div class="form-group">
           <label>Preferred Availability</label>
-          <select>
+          <select id="availability">
             <option value="">Select one...</option>
             <option>Mornings (9am–12pm)</option>
             <option>Afternoons (12pm–4pm)</option>
@@ -858,25 +1037,25 @@
         <div class="form-group">
           <label>Areas of Concern (select all that apply)</label>
           <div class="checkbox-group">
-            <label class="checkbox-label"><input type="checkbox"> Chronic Fatigue</label>
-            <label class="checkbox-label"><input type="checkbox"> Digestive Issues</label>
-            <label class="checkbox-label"><input type="checkbox"> Anxiety / Stress</label>
-            <label class="checkbox-label"><input type="checkbox"> Sleep Difficulties</label>
-            <label class="checkbox-label"><input type="checkbox"> Hormonal Imbalance</label>
-            <label class="checkbox-label"><input type="checkbox"> Pain / Inflammation</label>
-            <label class="checkbox-label"><input type="checkbox"> Immune Support</label>
-            <label class="checkbox-label"><input type="checkbox"> Weight / Metabolism</label>
+            <label class="checkbox-label"><input type="checkbox" value="Chronic Fatigue"> Chronic Fatigue</label>
+            <label class="checkbox-label"><input type="checkbox" value="Digestive Issues"> Digestive Issues</label>
+            <label class="checkbox-label"><input type="checkbox" value="Anxiety / Stress"> Anxiety / Stress</label>
+            <label class="checkbox-label"><input type="checkbox" value="Sleep Difficulties"> Sleep Difficulties</label>
+            <label class="checkbox-label"><input type="checkbox" value="Hormonal Imbalance"> Hormonal Imbalance</label>
+            <label class="checkbox-label"><input type="checkbox" value="Pain / Inflammation"> Pain / Inflammation</label>
+            <label class="checkbox-label"><input type="checkbox" value="Immune Support"> Immune Support</label>
+            <label class="checkbox-label"><input type="checkbox" value="Weight / Metabolism"> Weight / Metabolism</label>
           </div>
         </div>
 
         <div class="form-group">
           <label>Tell us a little about what's brought you here</label>
-          <textarea placeholder="Share as much or as little as you're comfortable with. What are your main health concerns or goals?"></textarea>
+          <textarea id="about" placeholder="Share as much or as little as you're comfortable with. What are your main health concerns or goals?"></textarea>
         </div>
 
         <div class="form-group">
           <label>Have you worked with a holistic or integrative practitioner before?</label>
-          <select>
+          <select id="priorExperience">
             <option value="">Select one...</option>
             <option>Yes, I have experience with holistic care</option>
             <option>No, this is new territory for me</option>
@@ -884,7 +1063,7 @@
           </select>
         </div>
 
-        <button type="submit" class="form-submit">Submit My Request →</button>
+        <button type="submit" class="form-submit" id="submit-btn">Submit My Request →</button>
       </form>
 
       <div id="success-msg">
@@ -898,19 +1077,58 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo"><span>K</span>ORE Integrative Health</div>
-  <p>© 2025 KORE Integrative Health · All rights reserved</p>
-  <p>Crafted with care · contact@korehealth.com</p>
+  <div class="footer-logo"><span>C</span>OR Integrative Health</div>
+  <p>© 2025 COR Integrative Health · All rights reserved</p>
+  <p>Crafted with care · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b4b8b9a3b6b4a397bcb8a5b2bfb2b6bba3bff9b4b8ba">[email&#160;protected]</a></p>
 </footer>
 
 <script>
+  function toggleService(btn) {
+    const card = btn.closest('.service-card');
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.service-card.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLc_SBjtEOM_A7aACzS8RyX8gVSnIPkTm6EFwgRZK66emyyMKKnpBoelEQOVaD-1wT/exec';
+
   document.getElementById('intake-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    this.style.display = 'none';
-    document.getElementById('success-msg').style.display = 'block';
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const concerns = [...document.querySelectorAll('.checkbox-group input:checked')]
+      .map(cb => cb.value).join(', ');
+
+    const payload = {
+      firstName:       document.getElementById('firstName').value,
+      lastName:        document.getElementById('lastName').value,
+      email:           document.getElementById('email').value,
+      phone:           document.getElementById('phone').value,
+      contactMethod:   document.getElementById('contactMethod').value,
+      availability:    document.getElementById('availability').value,
+      concerns:        concerns,
+      about:           document.getElementById('about').value,
+      priorExperience: document.getElementById('priorExperience').value,
+    };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      document.getElementById('intake-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }).catch(() => {
+      btn.textContent = 'Submit My Request →';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again.');
+    });
   });
 
-  // Subtle scroll-triggered fade-ins
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -927,6 +1145,3 @@
     observer.observe(el);
   });
 </script>
-
-</body>
-</html>
